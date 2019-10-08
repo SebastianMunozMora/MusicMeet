@@ -1,0 +1,12 @@
+<div>
+    Practices
+    <%= link_to "Create New Practice", new_practice_path %>
+</div>
+
+<%  @practices.each do |practice| %>
+
+        <h1><%= practice.date.strftime("%m/%d/%Y") if practice.date  %>
+        <%= practice.location %></h1>
+        <p><%= practice.description %></p>
+                
+    <% end %>

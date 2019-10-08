@@ -1,0 +1,8 @@
+<div>
+<%= form_for @practice do|f|%>
+    Date <%= f.text_field :date %>
+    Location <%= f.text_field :location %>
+    Description <%= f.text_field :description %>
+    <%= f.submit "Add Practice" %>
+<% end %>
+</div>
