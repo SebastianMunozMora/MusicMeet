@@ -1,12 +1,19 @@
 <div>
     Practices
-    <%= link_to "Create New Practice", new_practice_path %>
 </div>
+<%= button_to "Create New Practice", new_practice_path, method: :get %>
 
 <%  @practices.each do |practice| %>
 
         <h1><%= practice.date.strftime("%m/%d/%Y") if practice.date  %>
-        <%= practice.location %></h1>
+        <%=  link_to practice.location, practice_path(practice) %></h1>
         <p><%= practice.description %></p>
-                
+        <% practice.signups.each do |signup|%>
+            <%= button_to signup.user.name%>
+        <% end %>
+        <% if !practice.users.include?(current_user)%>
+            <%= button_to "Join Practice", signups_path, params: {practice_id: practice.id}%>
+        <% else  %>
+            <%= button_to "Decline Practice", signup_path(current_user.signups.find_by(practice: practice)), method: :delete, params: {practice_id: practice.id} %>
+        <%end%>
     <% end %>

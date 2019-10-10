@@ -10,12 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2019_10_08_184847) do
-
-  create_table "groups", force: :cascade do |t|
-    t.string "name"
-    t.string "style"
-  end
+ActiveRecord::Schema.define(version: 2019_10_10_151235) do
 
   create_table "practices", force: :cascade do |t|
     t.datetime "date"
