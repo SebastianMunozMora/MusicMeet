@@ -1,19 +1,55 @@
-<div>
-    Practices
+<div class="sessions">
+<div class="text-center bg-dark mb-3 text-light">
+    Sessions in your town
 </div>
-<%= button_to "Create New Practice", new_practice_path, method: :get %>
-
+<%= link_to " New", new_practice_path ,class:"btn btn-dark mb-3" %>
+<div class="ml-3">
 <%  @practices.each do |practice| %>
-
-        <h1><%= practice.date.strftime("%m/%d/%Y") if practice.date  %>
-        <%=  link_to practice.location, practice_path(practice) %></h1>
-        <p><%= practice.description %></p>
-        <% practice.signups.each do |signup|%>
-            <%= button_to signup.user.name%>
-        <% end %>
-        <% if !practice.users.include?(current_user)%>
-            <%= button_to "Join Practice", signups_path, params: {practice_id: practice.id}%>
-        <% else  %>
-            <%= button_to "Decline Practice", signup_path(current_user.signups.find_by(practice: practice)), method: :delete, params: {practice_id: practice.id} %>
-        <%end%>
+        <div class="card mb-3 border-dark" style="width: 25rem;">
+            <ul class="list-group list-group-flush border-dark">
+                <li class="list-group-item"><%= practice.date.strftime("%m/%d/%Y") if practice.date  %></li>
+                <li class="list-group-item"><%= practice.location %></li>
+                <li class="list-group-item">
+                    <a href="#">
+                        <% practice.signups.each do |signup|%>
+                            <div class="profile_card">
+                                <div>
+                                    <%= link_to signup.user.name %>
+                                </div>
+                                <br>
+                                <% if signup.user.avatar.attached? %>
+                                    <%= image_tag signup.user.avatar, class:"picture"%> 
+                                <% end %>
+                            </div> 
+                        <% end %>
+                    </a>
+                </li>
+            </ul>
+            <div class="card-body border-dark bg">
+                <p class="card-text"><%=practice.description%></p>
+                
+            </div>
+            <div class="card-header text-right bg bg-dark">
+                <% if !practice.users.include?(current_user)%> 
+                    <% 18.times do |n|%>
+                        <div class="vugr"></div>
+                    <%end%>
+                    <%= button_to "Join", signups_path, params: {practice_id: practice.id}, class:"btn btn-labeled btn-success"%>
+                <% elsif current_user.id != practice.owner_id %>
+                    <% 18.times do |n|%>
+                        <%if n > 15%>
+                            <div class="vur"></div>
+                        <%elsif n > 10%>
+                            <div class="vuy"></div>
+                        <%else%>
+                            <div class="vug"></div>
+                        <%end%>
+                    <%end%>
+                    <%= button_to "Decline", signup_path(current_user.signups.find_by(practice: practice)), method: :delete, params: {practice_id: practice.id}, class:"btn btn-danger" %>
+                <%end%>
+            </div>
+        </div>
     <% end %>
+    </div>
+    </div>
+<%=debug current_user%>

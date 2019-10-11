@@ -1,10 +1,12 @@
 <div>
-    <%= @practice.date %>
-    <%= @practice.location %>
-    <% @practice.signups.each do|signup| %>
-        <%= signup.user.email %>
-    <% end %>
-    <% if current_user.id == @practice.owner_id>
+<div>
+    <%= @practice.date.strftime("%m/%d/%Y") %>
+    </div>
+    <div><%= @practice.location %></div>
+    <div><% @practice.signups.each do|signup| %>
+        <%= signup.user.name %>
+    <% end %></div>
+    <% if current_user.id == @practice.owner_id %>
         <%= link_to "Delete", practice_path(@practice),
                                         method: :delete,
                                         data: { confirm: 'Are you sure?'}%>
