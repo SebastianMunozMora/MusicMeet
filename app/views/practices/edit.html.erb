@@ -1,0 +1,17 @@
+<div>
+    <%= form_for @practice do|f|%>
+        <div>
+            Date <%= f.text_field :date %>
+        </div>
+        <div>
+            Location <%= f.text_field :location %>
+        </div>
+        <div>
+            Description <%= f.text_field :description %>
+        </div>
+        <div>
+            <%= f.submit "Add Practice" %>
+        </div>
+        </div>
+    <% end %>
+</div>

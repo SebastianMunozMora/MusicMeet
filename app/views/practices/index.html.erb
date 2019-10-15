@@ -18,7 +18,7 @@
                                 </div>
                                 <br>
                                 <% if signup.user.avatar.attached? %>
-                                    <%= image_tag signup.user.avatar, class:"picture"%> 
+                                    <%= image_tag signup.user.avatar.variant(resize: "100x100!").processed%> 
                                 <% end %>
                             </div> 
                         <% end %>
@@ -46,10 +46,16 @@
                         <%end%>
                     <%end%>
                     <%= button_to "Decline", signup_path(current_user.signups.find_by(practice: practice)), method: :delete, params: {practice_id: practice.id}, class:"btn btn-danger" %>
+                <% else %>
+                    <%= link_to "Delete", practice_path(practice),
+                                        method: :delete,
+                                        data: { confirm: 'Are you sure?'}%>
+                    <%= link_to "Edit", practice_path(practice),
+                                        method: :update %>
                 <%end%>
             </div>
         </div>
     <% end %>
     </div>
     </div>
-<%=debug current_user%>
+<%#debug current_user%>

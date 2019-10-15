@@ -17,7 +17,7 @@
     background-image: image-url("diy-acoustic-diffuser.jpg")
 }
 body{
-    background-image: image-url("anechoic_pattern.jpg")
+    //background-image: image-url("anechoic_pattern.jpg")
 }
 .vug{
     float: left;
@@ -60,11 +60,10 @@ body{
     margin-right: 5px
 }
 .profile_card{
-    border-style: solid;
-    border-width: 1px;
-    border-color: #e28f2f;    
+    background-color: rgb(197, 172, 125);
     float: left;
     margin-left: 5px;
+    margin-bottom: 5px;
 }
 .picture{
     width: 40px;
